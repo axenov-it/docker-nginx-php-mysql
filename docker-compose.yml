@@ -17,7 +17,7 @@ services:
       - "443:443"
     networks:
       docker_net:
-        ipv4_address: 172.28.1.1
+        ipv4_address: 172.29.1.1
 
   php:
     container_name: php-fpm
@@ -28,7 +28,7 @@ services:
       - "./app:/app"
     networks:
       docker_net:
-        ipv4_address: 172.28.1.2
+        ipv4_address: 172.29.1.2
   mysql:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
@@ -37,7 +37,7 @@ services:
       MYSQL_ROOT_PASSWORD: 11111111
     networks:
       docker_net:
-        ipv4_address: 172.28.1.3
+        ipv4_address: 172.29.1.3
 
   adminer:
     image: adminer
@@ -46,11 +46,11 @@ services:
       - 8080:8080
     networks:
       docker_net:
-        ipv4_address: 172.28.1.4
+        ipv4_address: 172.29.1.4
 
 networks:
   docker_net:
     ipam:
       driver: default
       config:
-        - subnet: 172.28.0.0/16
+        - subnet: 172.29.0.0/16
