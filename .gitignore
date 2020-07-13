@@ -1,4 +1,5 @@
 /apps*
 /docker/nginxServer/config/sites-available/*
 /docker/nginxServer/config/sites-enabled/*
+/docker/nginxServer/logs/*
 /docker/php/Dockerfile
