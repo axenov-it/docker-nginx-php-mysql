@@ -1,11 +1,11 @@
-ACTON="$1"
+ACTION="$1"
 BASE_DIR=$(pwd)
 AVAILABLE_DIR=$BASE_DIR/docker/nginxServer/config/sites-available
 ENABLED_DIR=$BASE_DIR/docker/nginxServer/config/sites-enabled
 HOSTS_DIR=$BASE_DIR/docker/nginxServer/config/hosts
+PHP_DIR=$BASE_DIR/docker/php
 
-
-if [ "$ACTON" = "create-host" ]; then
+if [ "$ACTION" = "create-host" ]; then
   read -p 'Enter host name: ' NAME
   # copy from /nginxServer/config/host to nginxServer/config/sites-available/$NAME
   cp $HOSTS_DIR/example.conf $AVAILABLE_DIR/$NAME.conf
@@ -21,15 +21,18 @@ if [ "$ACTON" = "create-host" ]; then
 
   #write host to /etc/hosts file
   sudo sh -c "echo 127.0.0.1  $NAME >> /etc/hosts"
-
-elif [ "$ACTON" = "delete-host" ]; then
+elif [ "$ACTION" = "delete-host" ]; then
   read -p 'Enter host name: ' NAME
   # delete host files
   rm -f $AVAILABLE_DIR/$NAME.conf & rm -f $ENABLED_DIR/$NAME.conf
-elif ["$ACTON" = "run"]; then
-  # build and run docker container
+elif [ "$ACTION" = "php" ]; then
+  read -p 'Enter php version: ' NAME
+  rm $PHP_DIR/Dockerfile
+  cp $PHP_DIR/phpVersions/Dockerfile.php$NAME-fpm $PHP_DIR/Dockerfile
+elif [ "$ACTION" = "run" ]; then
+  # build and run docker container  
   docker-compose up -d --build
-elif ["$ACTON" = "clear"]; then
+elif [ "$ACTION" = "clear" ]; then
   # clear docker containers, images, volumes
   docker-compose down
   docker-compose down -v

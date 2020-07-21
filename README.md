@@ -4,8 +4,11 @@ Build project with docker, docker-compose, nginx, mysql, php
 
 ## BASH SCRIPTS
 
-- sh run.sh - start and build docker containers with docker-compose
-- clear.sh - clear all containers, images and volumes
+- sh app.sh run - start and build docker containers with docker-compose
+- sh app.sh clear - clear all containers, images and volumes
+- sh app.sh create-host - generate files for virtual host
+- sh app.sh delete-host - delete virtual host files
+- sh app.sh php {php_version} - generate php Docker compose config
 
 ## RUNNING WEB APPS
 
