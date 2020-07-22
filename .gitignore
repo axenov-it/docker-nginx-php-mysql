@@ -3,3 +3,4 @@
 /docker/nginxServer/config/sites-enabled/*
 /docker/nginxServer/logs/*
 /docker/php/Dockerfile
+*.sql

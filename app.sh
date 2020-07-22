@@ -37,6 +37,11 @@ elif [ "$ACTION" = "clear" ]; then
   docker-compose down
   docker-compose down -v
   docker system prune -a --volumes -f
+elif [ "$ACTION" = "import-dump" ]; then
+  docker container ps
+  read -p 'Enter container id: ' CONTAINER_ID
+  read -p 'Enter db name: ' DB_NAME
+  docker exec -i $CONTAINER_ID sh -c "exec mysql -uroot -p'11111111' $DB_NAME" < dump.sql
 else
     echo 'Enter command: run | clear | create-host | delete-host'
     exit
